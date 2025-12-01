@@ -41,9 +41,10 @@ Here's a [short video tutorial for MinGW Installation](https://www.youtube.com/w
 ### Qt Application
 
 1. Download [Qt Online Installer](https://www.qt.io/download-qt-installer-oss) for your Operating System.
-2. Open the project [`QtApp`](/QTApp) directory in QT Creator.
-3. Click on the Build Icon in Bottom right corner.
-4. Click on the Run Icon.
+2. Install Qt Creator using Qt Online Installer.
+3. Open the project [`QtApp`](/QTApp) directory in Qt Creator.
+4. Click on the Build Icon in Bottom right corner.
+5. Click on the Run Icon.
 
 - **On MacOS :** You can also install qt using homebrew:
   ```bash
@@ -63,7 +64,29 @@ Here's a [short video tutorial for MinGW Installation](https://www.youtube.com/w
     2. You will find a new folder `app`.
     3. Inside `app` folder there will be a `NextGenATM` App. Double Click to run it.
    
-## Usage
-
-
-
+## Usage (QT Only)
+*Note : Account details are stored as object and created before runtime.* [View Code](https://github.com/yash-g01/Next-Gen-ATM/blob/88ac01a7e7f301bc84f7de15594c29f29e42fffc/QtApp/atm_qt_app.cpp#L228)
+1. Menu Page
+   - Select Options (Account Number, UPI Withdrawal & NFC)
+   ![MenuPage](screenshots/MenuPage.png)
+2. Account Login (Enter Account Number on Menu Page then click `Verify Account`)
+   - Authentication
+   ![AuthenticationPage](screenshots/PinPage.png)
+   - Home Page
+   ![HomePage](screenshots/HomePage.png)
+   - Deposit
+   ![DepositPage](screenshots/DepositPage.png)
+   - Withdraw
+   ![WithdrawPage](screenshots/WithdrawPage.png)
+*Note : Deposit & Withdrawl Amount should be in multiples of 100.* You can change this behaviour [here](https://github.com/yash-g01/Next-Gen-ATM/blob/88ac01a7e7f301bc84f7de15594c29f29e42fffc/QtApp/atm_qt_app.cpp#L63).
+3. UPI Withdrawal
+   - Enter Amount to generate QR
+   ![UPIAmountPage](screenshots/UPIAmountPage.png)
+*Note : Amount should be in multiples of 100.* You can change this behaviour [here](https://github.com/yash-g01/Next-Gen-ATM/blob/4b74cd5727d013b17e457a3d169465ad630f858e/QtApp/atm_qt_app.cpp#L687).
+   - Show generated QR
+   ![UpiQrPage](screenshots/UpiQrPage.png)
+*Note : Payment can't be updated since transactions are not being tracked.*
+4. NFC
+   - NFC Page
+   ![NFCPage](screenshots/NFCPage.png)
+   
