@@ -30,7 +30,6 @@
 #include <algorithm>
 #include <stdexcept>
 
-// Ensure these headers exist in your project path or are mocked
 #include "nfcworker.h"
 #include "qrcodegen.hpp"
 
