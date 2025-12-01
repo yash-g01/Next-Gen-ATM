@@ -684,7 +684,7 @@ private:
 
         connect(genQrBtn, &QPushButton::clicked, [this]() {
             double amount = upiAmtInput->text().toDouble();
-            if (amount <= 0 || amount > 10000) {
+            if (amount <= 0 || amount > 10000 || amount % 100 != 0) {
                 QMessageBox::warning(this, "Invalid", "Please enter a valid amount.");
                 return;
             }
