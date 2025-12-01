@@ -87,6 +87,16 @@ Here's a [short video tutorial for MinGW Installation](https://www.youtube.com/w
    ![UpiQrPage](screenshots/UpiQrPage.png)
 *Note : Payment can't be updated since transactions are not being tracked.*
 4. NFC
+   - Pre-requisite:
+     - Setup Phone to send http request to the NextGenATM application when an NFC Card is scanned.
+       1. iPhone
+          - Open `Shortcuts App`
+          - Go to `Automate` section.
+          - Create `New Automation`.
+          - Search `NFC`
+          - Click `Scan` and Scan the NFC Card and Name it, then click Next.
+          - Click `New Blank Automation`
+       2. 
    - NFC Page
    ![NFCPage](screenshots/NFCPage.png)
    
