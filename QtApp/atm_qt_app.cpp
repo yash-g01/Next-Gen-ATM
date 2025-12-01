@@ -776,7 +776,7 @@ private:
     }
 
     void generateAndShowQR(double amount) {
-        QString upiString = QString("upi://pay?pa=gautam-yash@pingpay&pn=ATM%20Machine%20Simulation&am=%1&cu=INR")
+        QString upiString = QString("upi://pay?pa=atm@bank&pn=ATM%20Machine%20Simulation&am=%1&cu=INR")
         .arg(amount);
 
         try {
