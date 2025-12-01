@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/nfc_card.png</file>
+    </qresource>
+</RCC>
