@@ -90,13 +90,17 @@ Here's a [short video tutorial for MinGW Installation](https://www.youtube.com/w
    - Pre-requisite:
      - Setup Phone to send http request to the NextGenATM application when an NFC Card is scanned.
        1. iPhone
-          - Open `Shortcuts App`
+          - Open this link in `Shortcuts App` : https://www.icloud.com/shortcuts/505b30bf22ce46ae958031a05f032233
+          - Click on `Add Shortcut`.
+          - Open the shortcut and change `192.168.1.7` to the IP Address of the computer running the simulation.
           - Go to `Automate` section.
           - Create `New Automation`.
           - Search `NFC`
-          - Click `Scan` and Scan the NFC Card and Name it, then click Next.
-          - Click `New Blank Automation`
-       2. 
+          - Click `Scan` and Scan the NFC Card and Name it, then click `Next` -> click `Done`.
+          - Search for `Run Shortcut` -> Select the `Get URL shortcut` we added on step 2.
+       2. Android
+          - Download [Automate](https://play.google.com/store/apps/details?id=com.llamalab.automate&hl=en_IN) and [HTTP Request Shortcuts](https://play.google.com/store/apps/details?id=ch.rmy.android.http_shortcuts&hl=en_IN) app.
+          - 
    - NFC Page
    ![NFCPage](screenshots/NFCPage.png)
    
