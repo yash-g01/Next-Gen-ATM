@@ -64,7 +64,7 @@ Here's a [short video tutorial for MinGW Installation](https://www.youtube.com/w
     2. You will find a new folder `app`.
     3. Inside `app` folder there will be a `NextGenATM` App. Double Click to run it.
    
-## Usage (QT Only)
+## Usage (Qt Only)
 *Note : Account details are stored as object and created before runtime.* [View Code](https://github.com/yash-g01/Next-Gen-ATM/blob/88ac01a7e7f301bc84f7de15594c29f29e42fffc/QtApp/atm_qt_app.cpp#L228)
 1. Menu Page
    - Select Options (Account Number, UPI Withdrawal & NFC)
