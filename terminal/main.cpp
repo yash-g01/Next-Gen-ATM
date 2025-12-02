@@ -225,7 +225,7 @@ static void printQr(const QrCode &qr) {
         for (int x = -border; x < qr.getSize() + border; x++) {
             // Note: Some Windows consoles might struggle with these unicode blocks
             // Use simple # and space if that happens
-            std::cout << (qr.getModule(x, y) ? "\u2588\u2588" : "##");
+            std::cout << (qr.getModule(x, y) ? "\u2588\u2588" : "  ");
         }
         std::cout << std::endl;
     }
