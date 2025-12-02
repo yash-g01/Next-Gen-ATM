@@ -1,4 +1,5 @@
 #include <iostream>
+#include <future>
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -60,10 +61,10 @@ class Account {
         string accountHolderName;
         double balance;
         int pin;
-        long long cardNumber;
+        int cardNumber;
 
     public:
-        Account(int accNum, string accHolder, double bal, int pinCode, long long cardNum)
+        Account(int accNum, string accHolder, double bal, int pinCode, int cardNum)
             : accountNumber(accNum), accountHolderName(accHolder), balance(bal), pin(pinCode), cardNumber(cardNum) {
             }
 
@@ -101,7 +102,7 @@ class Account {
         }
 };
 
-Account* findAccount(Account accounts[], int size, long long accNum) {
+Account* findAccount(Account accounts[], int size, int accNum) {
     for (int i = 0; i < size; i++) {
         if (accounts[i].getAccountNumber() == accNum) {
             return &accounts[i];
@@ -110,7 +111,7 @@ Account* findAccount(Account accounts[], int size, long long accNum) {
     return nullptr;
 }
 
-Account* findCardNum(Account accounts[], int size, long long cardNum) {
+Account* findCardNum(Account accounts[], int size, int cardNum) {
     for (int i = 0; i < size; i++) {
         if (accounts[i].getCardNumber() == cardNum) {
             return &accounts[i];
@@ -246,7 +247,7 @@ int main() {
         int mainChoice;
 
         cout << "\n=================================" << endl;
-        cout << "      ATM MACHINE SIMULATION      " << endl;
+        cout << "           NEXT GEN ATM           " << endl;
         cout << "=================================" << endl;
 
         cout << "1. Enter Account Number" << endl;
@@ -255,16 +256,29 @@ int main() {
         cout << "Select option: ";
         cin >> mainChoice;
 
-        if (mainChoice == 1) {
-            int enteredAccount;
-            int enteredPin;
+        if (mainChoice == 1 || mainChoice == 3) {
             Account* currentSession = nullptr;
-            cout << "Please enter Account Number (or <=0 to back): ";
-            cin >> enteredAccount;
 
-            if (enteredAccount <= 0) continue;
-
-            currentSession = findAccount(bankAccounts, NUM_ACCOUNTS, enteredAccount);
+            if (mainChoice == 1) {
+                int enteredAccount;
+                int enteredPin;
+                
+                cout << "Please enter Account Number (or <=0 to back): ";
+                cin >> enteredAccount;
+    
+                if (enteredAccount <= 0) continue;
+    
+                currentSession = findAccount(bankAccounts, NUM_ACCOUNTS, enteredAccount);
+            } else {
+                future<string> nfcData = async(launch::async, &startNFCServer);
+                string cardNumStr = nfcData.get();
+                try{
+                    int cardNum = stoi(cardNumStr);
+                    currentSession = findCardNum(bankAccounts, NUM_ACCOUNTS, cardNum);
+                } catch (...) {
+                    cout << "[ERROR] Invalid data received from NFC tag." << endl;
+                }
+            }
 
             if (currentSession != nullptr) {
                 cout << "Enter PIN: ";
@@ -323,43 +337,6 @@ int main() {
             cin >> simInput;
             if (simInput == 1) cout << "[SUCCESS] Payment received! Dispensing cash..." << endl;
             else cout << "[CANCELLED]" << endl;
-        }
-
-        else if (mainChoice == 3) {
-            string nfcData = startNFCServer();
-            
-            if (nfcData == "") {
-                cout << "[ERROR] NFC Read Failed or Cancelled." << endl;
-                continue;
-            }
-
-            try {
-                long long cardNum = stoll(nfcData);
-                Account* currentSession = findCardNum(bankAccounts, NUM_ACCOUNTS, cardNum);
-
-                if (currentSession != nullptr) {
-                    cout << "\n[NFC] Card Detected: " << currentSession->getName() << endl;
-                    
-                    int enteredPin;
-                    cout << "Enter PIN to verify: ";
-                    cin >> enteredPin;
-
-                    if (currentSession->validatePin(enteredPin)) {
-                        int withdrawAmount;
-                        cout << "PIN Verified." << endl;
-                        cout << "Enter Amount to Withdraw: ";
-                        cin >> withdrawAmount;
-                        
-                        currentSession->withdraw(withdrawAmount);
-                    } else {
-                        cout << "\n[ERROR] Invalid PIN. Transaction Cancelled." << endl;
-                    }
-                } else {
-                    cout << "\n[ERROR] Card Number" << cardNum << ") not found in database." << endl;
-                }
-            } catch (...) {
-                cout << "[ERROR] Invalid data received from NFC tag." << endl;
-            }
         }
 
         else {
